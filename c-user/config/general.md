@@ -1,5 +1,6 @@
 % SPDX-License-Identifier: CC-BY-SA-4.0
 
+% Copyright (C) 2024 Mohamed Hassan <muhammad.hamdy.hassan@gmail.com>
 % Copyright (C) 2020, 2023 embedded brains GmbH & Co. KG
 % Copyright (C) 1988, 2022 On-Line Applications Research Corporation (OAR)
 
@@ -1191,7 +1192,86 @@ The stack checker performs run-time stack bounds checking. This increases the
 time required to create tasks as well as adding overhead to each context
 switch.
 
+Once the stack checker is enabled, a custom stack checker reporter can be
+configured using {ref}`CONFIGURE_STACK_CHECKER_REPORTER`.
+
 In 4.9 and older, this configuration option was named `STACK_CHECKER_ON`.
+
+% Generated from spec:/acfg/if/stack-checker-reporter
+
+```{raw} latex
+\clearpage
+```
+
+```{index} CONFIGURE_STACK_CHECKER_REPORTER
+```
+
+```{index} stack checker reporter
+```
+
+(CONFIGURE_STACK_CHECKER_REPORTER)=
+
+## CONFIGURE_STACK_CHECKER_REPORTER
+
+```{eval-rst}
+.. rubric:: CONSTANT:
+```
+
+`CONFIGURE_STACK_CHECKER_REPORTER`
+
+```{eval-rst}
+.. rubric:: OPTION TYPE:
+```
+
+This configuration option is an initializer define.
+
+```{eval-rst}
+.. rubric:: DEFAULT VALUE:
+```
+
+The default value is `rtems_stack_checker_reporter_quiet`, which only calls the
+fatal error handler.
+
+```{eval-rst}
+.. rubric:: DESCRIPTION:
+```
+
+This configuration option allows specifying a custom reporter function for the
+stack checker. If this option is undefined, then the default reporter is the
+quiet reporter, which only calls the fatal error handler.
+
+```{eval-rst}
+.. rubric:: NOTES:
+```
+
+This configuration option works in conjunction with
+{ref}`CONFIGURE_STACK_CHECKER_ENABLED`.
+
+`CONFIGURE_STACK_CHECKER_REPORTER` can be set to one of the following
+reporters:
+
+- `rtems_stack_checker_reporter_quiet`: The default quiet reporter that only
+  calls the fatal error handler in case of stack overflow.
+
+- `rtems_stack_checker_reporter_print_details`: The detailed reporter that
+  provides information about the task that caused the stack overflow.
+
+- Or a user-defined reporting function.
+
+A typical reporter should follow the signature below with these parameters:
+
+```c
+void rtems_stack_checker_reporter(
+  const rtems_tcb *running,
+  bool pattern_ok
+);
+```
+
+- `const rtems_tcb *running`: A pointer to the currently executing thread that
+  is being checked for stack overflow.
+
+- `bool pattern_ok`: A boolean value that is false if the stack-canary pattern
+  has been corrupted, true otherwise.
 
 % Generated from spec:/acfg/if/ticks-per-time-slice
 

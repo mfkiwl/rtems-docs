@@ -192,6 +192,91 @@ In addition, the following command can set python3 as the default python interpr
 # sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 ```
 
+(NixOS)=
+
+### NixOS
+
+NixOS is not a [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html)
+compliant distro unlike most distros. But it does
+provide a way to simulate FHS environment using
+[buildFHSEnv](https://nixos.org/manual/nixpkgs/stable/#sec-fhs-environments).
+
+Create `shell.nix` with:
+```nix
+{
+  pkgs ? import <nixpkgs> { },
+}:
+let
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+    pkgs.libmpc
+    pkgs.mpfr
+    pkgs.gmp
+    pkgs.ncurses
+    pkgs.flex
+  ];
+in
+(pkgs.buildFHSEnv {
+  name = "rtems-build-environment";
+  targetPkgs = pkgs: with pkgs; [
+    gcc
+    gdb
+    gnumake # you might want cmake or ninja
+    bison
+    flex
+    gnum4
+    gnupatch
+    gmp
+    mpfr
+    mpc
+    isl
+    pkg-config
+    autoconf
+    automake
+    libmpc
+    xz
+    glib
+    glib.dev
+    unzip
+    ncurses
+    ncurses.dev
+    git
+    zlib
+    dtc
+
+    # if emulation is required, since rtems-run uses qemu under the hood.
+    # qemu_full
+
+    (python3.withPackages (
+      ps: with ps; [
+        distro
+        # for running tests
+        standard-telnetlib
+      ]
+    ))
+  ];
+
+  # for additional dev outputs
+  extraOutputsToInstall = [ "dev" ];
+  # also set LD_LIBRARY_PATH
+  profile = ''
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
+  '';
+  runScript = ''bash''; # you might want zsh or nu.
+}).env
+
+```
+
+then running
+```none
+# assuming you named the file `shell.nix`
+$ nix-shell
+
+# or else
+$ nix-shell env-filename.nix
+```
+would give you a FHS compliant environment with the required packages in which you
+can build tools, bsps and your application.
+
 (FreeBSD)=
 
 ## FreeBSD

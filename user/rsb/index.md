@@ -55,6 +55,7 @@ The RTEMS Source Builder is known to work on:
 - Ubuntu (includes XUbuntu)
 - Linux Mint
 - openSUSE
+- NixOS
 - FreeBSD
 - NetBSD
 - Solaris

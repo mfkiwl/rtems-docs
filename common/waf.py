@@ -286,6 +286,7 @@ def cmd_configure(ctx):
             ctx.check_python_module('sphinx_tippy')
             ctx.check_python_module('sphinx_togglebutton')
             ctx.check_python_module('sphinxext.opengraph')
+            ctx.check_python_module('py_markdown_table')
         else:
             pass
 

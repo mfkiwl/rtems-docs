@@ -11,7 +11,8 @@ running so they can start with the real work. It is specifically meant for
 prospective applicants to Google Summer of Code, but should be helpful for
 anyone who wants to get in to development and contributing to RTEMS.
 
-Please join the {r:url}`discord` and ask questions in the `#gsoc` channel.
+Please use our [Users Forum](https://users.rtems.org/c/programs/gsoc/47) to ask
+any questions. Keep GSoC related questions in the GSoC category.
 
 Help correct any deficiencies in the code or documentation you spot,
 including those on the website. The ultimate goal of GSoC is to help you become
@@ -20,15 +21,15 @@ fixing small errors in the getting started resources.
 
 This section will help you to quickly setup a development environment without
 delving into the details. For more information you can go through the other
-subsections under {ref}`Quick Start <QuickStart>` chapter, ask in
-{r:url}`discord`, or ask on the {r:list}`users` and {r:list}`devel`.
+subsections under {ref}`Quick Start <QuickStart>` chapter, ask in the
+[Users Forum](https://users.rtems.org/c/programs/gsoc/47).
 
 We recommend all new developers use the current development (unreleased)
 version, which is currently @rtems-ver-major@. The
 {ref}`Quick Start Preparation <QuickStartPreparation>` should be
 consulted for guidance. Some examples shown may use released versions,
 which may not be recommended for your purposes. If you are unsure, feel free to
-inquire in the {r:url}`discord` or on the {r:list}`devel`.
+inquire in the [Users Forum](https://users.rtems.org/c/programs/gsoc/47).
 
 You will likely encounter the least difficulty by using a GNU/Linux
 environment, which could be in a virtual machine, for example that uses
@@ -128,8 +129,11 @@ git format-patch HEAD^ -o ../
 
 This should create a file in the parent directory (`../`) with a filename
 like `0001-commit-message.patch` where the first (subject) line of your
-commit message gets embedded in the filename. You can just attach these files
-to a {r:url}`discord` message in the `#gsoc` channel.
+commit message gets embedded in the filename.
+
+Please create a new threard in the GSoC category on our
+[Users Forum](https://users.rtems.org/c/programs/gsoc/47) and attach these
+files to your thread.
 
 ## Creating and Sending Merge Requests
 
@@ -153,3 +157,7 @@ Here are a few pointers to keep in mind while creating the patches.
 
 As an initial test of submitting an MR, please add yourself to the correct
 tracking page of {r:url}`gsoc` for the current year.
+
+Our [Discord](https://www.rtems.org/discord) is available for those that want
+to see RTEMS development but all GSoC and User related activity should stay on the
+[Users Forum](https://users.rtems.org/).

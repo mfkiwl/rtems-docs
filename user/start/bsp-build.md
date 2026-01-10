@@ -104,6 +104,16 @@ remaining steps. Run the command:
 export PATH=$HOME/quick-start/rtems/@rtems-ver-major@/bin:"$PATH"
 ```
 
+> **Warning for Windows (WSL) Users:**
+> If you are using Windows Subsystem for Linux (WSL), ensure that you
+> append to your existing PATH (using `:$PATH`) rather than overwriting
+> it. Overwriting the PATH will cause Windows tools like `explorer.exe`
+> or VS Code (`code`) to stop working from the terminal.
+>
+> **Solution:** If you lose access to these tools, you can still execute
+> them using their absolute path (e.g., `/mnt/c/Windows/explorer.exe`)
+> or restore access by restarting your terminal session.
+
 Check your installed tools can be found by running:
 
 ```none
@@ -130,6 +140,11 @@ build a particular BSP variant (`sparc/erc32` in our case). We enable the build
 of the tests with the `BUILD_TESTS = True` option and use default values for
 everything else. For detailed information about the BSP build system, see
 {ref}`BSPBuildSystem`.
+
+> **Critical Step:**
+> You **must** create the `config.ini` file before running the configure
+> command. Copy and run the `echo` commands below exactly as shown to
+> generate this file, otherwise the build will fail.
 
 ```none
 cd $HOME/quick-start/src/rtems

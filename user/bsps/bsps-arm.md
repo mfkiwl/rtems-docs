@@ -13,6 +13,7 @@ arm/beagle
 arm/csb336
 arm/csb337
 arm/edb7312
+arm/efm32gg11
 arm/fvp
 arm/gumstix
 arm/imx

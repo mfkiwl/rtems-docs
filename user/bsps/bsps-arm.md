@@ -32,4 +32,5 @@ arm/xen
 arm/xilinx-zynq
 arm/xilinx-zynqmp
 arm/xilinx-zynqmp-rpu
+arm/xilinx-versal-rpu
 ```

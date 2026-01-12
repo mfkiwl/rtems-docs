@@ -121,10 +121,10 @@ by all BSPs of that architecture.
 > ```shell
 > $ cd arm
 > $ ls
-> altera-cyclone-v  fvp       lpc176x          shared    xilinx-zynq
-> atsam             gumstix   lpc24xx          smdk2410  xilinx-zynqmp
-> beagle            imx       lpc32xx          stm32f4   xilinx-zynqmp-rpu
-> csb336            imxrt     raspberrypi      stm32h7
+> altera-cyclone-v  fvp       lpc176x          shared    xilinx-versal-rpu
+> atsam             gumstix   lpc24xx          smdk2410  xilinx-zynq
+> beagle            imx       lpc32xx          stm32f4   xilinx-zynqmp
+> csb336            imxrt     raspberrypi      stm32h7   xilinx-zynqmp-rpu
 > csb337            include   realview-pbx-a9  tms570
 > edb7312           lm3s69xx  rtl22xx          xen
 > ```

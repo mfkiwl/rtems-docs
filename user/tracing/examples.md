@@ -27,12 +27,80 @@ Tracing using trace buffering consists of the following sets of features:
 
 1. Setup RTEMS for the `sparc/erc32` architecture-bsp pair to run the
    following example.
-2. Download the fileio [configuration file](https://devel.rtems.org/attachment/wiki/Developer/Tracing/Trace_Buffering/fileio-trace.ini) and store it on
+2. Use the `fileio-trace.ini` from below
    the top of the installed BSP's directory.
 3. Change the value of the keys: `rtems-path` and `prefix` according to your
    rtems installation. The `rtems-path` is the path to the bsp installation
    and `prefix` is the path to the tools used to build rtems. Also set the
    value of the `rtems-bsp` key to `sparc/erc32`.
+
+## FileIO config
+
+This file was previously available on the wiki: `fileio-trace.ini`
+
+```ini
+;
+; RTEMS Trace Linker FileIO Trace Configuration
+;
+; Copyright 2015 Chris Johns <chrisj@rtems.org>
+;
+
+;--------------------------------------------------------------------------
+[tracer]
+name = File IO tracer
+;
+; The configuration
+;
+options = fileio-options
+traces = fileio
+defines = fileio
+enables = fileio
+triggers = fileio
+functions = fileio-funcs, rtems-api, rtems-posix, libc-heap
+include = rtems.ini, rtld-base.ini, rtld-trace-buffer.ini, libc-heap.ini
+
+;--------------------------------------------------------------------------
+[fileio-options]
+dump-on-error = true
+;
+; Tools
+;
+prefix = /opt/rtems/4.11
+rtems-path = /opt/rtems/kernel/4.11
+rtems-bsp = sparc/sis
+;
+; Generator options.
+;
+gen-enables = enable
+gen-triggers = enable
+
+;--------------------------------------------------------------------------
+[fileio]
+generator = trace-buffer-generator
+define = '#define RTLD_TRACE_BUFFER_SIZE (1UL * 1024 * 1024)'
+trace = rtems_shell_init
+trace = malloc, calloc, realloc, free
+traces = rtems-api-semaphore, rtems-posix-mutex
+enable = rtems_shell_init
+enable = malloc, calloc, realloc, free
+enables = rtems-api-semaphore, rtems-posix-mutex
+trigger = rtems_shell_init
+
+;--------------------------------------------------------------------------
+[fileio-funcs]
+headers = fileio-headers
+signatures = fileio-signatures
+
+[fileio-headers]
+header = '#include <rtems/shell.h>"'
+
+[fileio-signatures]
+rtems_shell_init = rtems_status_code, const char*, size_t, rtems_task_priority, const char*, bool, bool, rtems_shell_login_check_t
+```
+
+
+
+
 
 ## Demonstration
 

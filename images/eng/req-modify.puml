@@ -19,7 +19,7 @@ repeat
 
   :Commit the changes with a proper message;
 
-  :Send the patch to the devel@rtems.org mailing list for review;
+  :Open an MR on our GitLab at https://gitlab.rtems.org for review;
 repeat while (Reviewers demand changes in the modified requirement?) is (Yes)
 ->No;
 

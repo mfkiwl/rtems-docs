@@ -12,7 +12,7 @@ start
 
 :Invoke: ""git format-patch"";
 
-:Send the patch series to devel@rtems.org for review;
+:Open an MR on our GitLab at https://gitlab.rtems.org for review;
 
 :Set N to 1;
 
